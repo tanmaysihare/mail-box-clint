@@ -4,19 +4,20 @@ import { useDispatch, useSelector } from "react-redux";
 import classes from "./login-signup.module.css";
 import { authActions } from "../../Store/Auth-Slice";
 import { uiActions } from "../../Store/ui-slice";
+import { useHistory } from "react-router-dom";
 
 const LoginSignup = () => {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const conformPasswordInputRef = useRef();
   const dispatch = useDispatch();
-
+  const history = useHistory();
   const isSignIn = useSelector((state) => state.auth.isSignIn);
 
   const switchModeHandler = () => {
-    if (isSignIn) {
+    
       dispatch(authActions.signup());
-    }
+    
   };
   const submitHandler = (event) => {
     event.preventDefault();
@@ -71,6 +72,7 @@ const LoginSignup = () => {
               message: "Login Successful... ",
             })
           );
+          history.replace('/compose');
         })
         .catch((err) => {
           dispatch(

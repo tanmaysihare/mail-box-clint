@@ -10,7 +10,11 @@ const uiSlice = createSlice({
         status: action.payload.status,
         title: action.payload.title,
         message: action.payload.message,
-      };
+        };
+        let isNotification = state.notification;
+        if(isNotification === !null){
+          setTimeout(()=>{isNotification = null},10000);
+        }
     },
   },
 });
